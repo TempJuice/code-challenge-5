@@ -29,4 +29,19 @@ router.get('/', function (req, res) {
     });//End of Messages.find
 });//End of router.get
 
+router.delete('/:id', function (req, res) {
+    Messages.findByIdAndRemove(
+        { _id: req.params.id },
+        function (err, data) {
+            if (err) {
+                console.log('delete error: ', err);
+
+                res.sendStatus(500);
+            } else {
+                res.sendStatus(200);
+            }
+        }
+    );
+});
+
 module.exports = router;

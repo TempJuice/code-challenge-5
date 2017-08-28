@@ -1,7 +1,6 @@
 app.controller('MessageController', ['$http', function ($http) {
     var self = this;
 
-console.log(self.newMessage);
 
     self.messages = { list: [] };
     
@@ -22,6 +21,12 @@ console.log(self.newMessage);
             self.messages.list = response.data;
         })//end of $http.get
     };//end of self.getListings()
+
+    self.deleteMessage = function (messageId) {
+        $http.delete('/messages/' + messageId).then(function (response) {
+            self.getMessages();
+        });
+    }
 
     self.getMessages();
 
